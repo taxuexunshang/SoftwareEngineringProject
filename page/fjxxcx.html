@@ -1,0 +1,335 @@
+<!DOCTYPE html>
+<html>
+
+<head>
+    <meta charset="utf-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1, maximum-scale=1">
+    <title>酒店管理系统</title>
+    <link rel="stylesheet" href="../layui/css/layui.css">
+    <script src="../layui/layui.js"></script>
+        <link rel="stylesheet" href="../css/border-pad.css" />
+    <style type="text/css">
+        #searchIpt {
+            margin-left: 5px;
+        }
+        .layui-anim.layui-anim-upbit dd{
+        	color: #000000;
+        }
+    </style>
+</head>
+
+<body>
+    <div class="layui-container" style="width: 100%">
+        <form class="layui-form bs-center">
+            <div class="layui-form-item layui-col-sm3">
+                <label class="layui-form-label">楼层</label>
+                <div class="layui-input-block">
+                    <select name="room" lay-verify="required">
+                        <option value=""></option>
+                        <option value="0">1层</option>
+                        <option value="1">2层</option>
+                        <option value="2">3层</option>
+                        <option value="3">4层</option>
+                        <option value="4">5层</option>
+                    </select>
+                </div>
+            </div>
+
+            <div class="layui-col-sm3">
+                <label class="layui-form-label">房间号：</label>
+                <div class="layui-input-block">
+                    <input type="text" name="userAccount" class="layui-input">
+                </div>
+            </div>
+            <div class="layui-col-sm2">
+                <a id="searchIpt" class="layui-btn layui-btn-normal">搜索</a>
+            </div>
+        </form>
+
+        <form action="">
+            <div class="layui-col-sm12 bs-center">
+                <table id="show" lay-filter="show"></table>
+            </div>
+        </form>
+    </div>
+</body>
+<!-- <script src="../js/accountManage.js"></script> -->
+<script type="text/html" id="ipts">
+    <div class="layui-btn-group">
+          <a class="layui-btn layui-btn-xs" lay-event="freezeMey">修改信息</a>
+          <a class="layui-btn layui-btn-xs" lay-event="freezeAct">详细信息</a>
+        </div>
+    </script>
+
+
+<form class="layui-form bs-center" action="" style="display: none;margin-top: 10px;" id="details">
+    <div class="layui-form-item">
+        <label class="layui-form-label">房间号</label>
+        <div class="layui-input-inline">
+            <input type="text" name="roomNum" required lay-verify="required" placeholder="请输入标题" autocomplete="off" class="layui-input">
+        </div>
+    </div>
+
+    <div class="layui-form-item">
+        <label class="layui-form-label">楼层</label>
+        <div class="layui-input-inline">
+            <select name="type" lay-verify="required">
+                <option value=""></option>
+                <option value="1层">1层</option>
+                <option value="2层">2层</option>
+                <option value="3层">3层</option>
+                <option value="4层">4层</option>
+                <option value="5层">5层</option>
+            </select>
+        </div>
+    </div>
+
+    <div class="layui-form-item">
+        <label class="layui-form-label">房间类型</label>
+        <div class="layui-input-inline">
+            <input type="text" name="roomType" required lay-verify="required" placeholder="请输入标题" autocomplete="off" class="layui-input">
+        </div>
+    </div>
+
+    <div class="layui-form-item">
+        <label class="layui-form-label">是否入住</label>
+        <div class="layui-input-inline">
+            <select name="city" lay-verify="required">
+                <option value="是">是</option>
+                <option value="否">否</option>
+            </select>
+        </div>
+    </div>
+
+    <div class="layui-form-item">
+        <label class="layui-form-label">是否向阳</label>
+        <div class="layui-input-inline">
+            <select name="city" lay-verify="required">
+                <option value="是">是</option>
+                <option value="否">否</option>
+            </select>
+        </div>
+    </div>
+
+    <div class="layui-form-item">
+        <label class="layui-form-label">是否损坏</label>
+        <div class="layui-input-inline">
+            <select name="city" lay-verify="required">
+                <option value="是">是</option>
+                <option value="否">否</option>
+            </select>
+        </div>
+    </div>
+
+
+    <div class="layui-form-item">
+        <div class="layui-input-block">
+            <button class="layui-btn" lay-submit lay-filter="formDemo">立即提交</button>
+            <button type="reset" class="layui-btn layui-btn-primary">重置</button>
+        </div>
+    </div>
+</form>
+
+<form class="layui-form bs-center" action="" style="display: none;margin-top: 10px;" id="details2">
+    <div class="layui-form-item">
+        <label class="layui-form-label">房间号</label>
+        <div class="layui-input-inline">
+            <input disabled="disabled" type="text" name="roomNum" required lay-verify="required" autocomplete="off" class="layui-input">
+        </div>
+    </div>
+
+    <div class="layui-form-item">
+        <label class="layui-form-label">楼层</label>
+        <div class="layui-input-inline">
+           <input disabled="disabled" type="text" name="roomFloor" required lay-verify="required" autocomplete="off" class="layui-input">
+        </div>
+    </div>
+
+    <div class="layui-form-item">
+        <label class="layui-form-label">房间类型</label>
+        <div class="layui-input-inline">
+            <input disabled="disabled" type="text" name="roomType" required lay-verify="required" autocomplete="off" class="layui-input">
+        </div>
+    </div>
+
+    <div class="layui-form-item">
+        <label class="layui-form-label">是否入住</label>
+        <div class="layui-input-inline">
+            <input disabled="disabled" type="text" name="canUse" required lay-verify="required" autocomplete="off" class="layui-input">
+        </div>
+    </div>
+
+    <div class="layui-form-item">
+        <label class="layui-form-label">是否向阳</label>
+        <div class="layui-input-inline">
+            <input disabled="disabled" type="text" name="hasSunshine" required lay-verify="required" autocomplete="off" class="layui-input">
+        </div>
+    </div>
+
+    <div class="layui-form-item">
+        <label class="layui-form-label">是否损坏</label>
+        <div class="layui-input-inline">
+            <input disabled="disabled" type="text" name="isBreak" required lay-verify="required" autocomplete="off" class="layui-input">
+        </div>
+    </div>
+
+
+    <div class="layui-form-item">
+        <div class="layui-input-block">
+            <!-- <button class="layui-btn">关闭</button> -->
+        </div>
+    </div>
+</form>
+
+<script>
+    layui.use(['table', 'layer', 'jquery', 'laydate'], function () {
+        var table = layui.table
+        var layer = layui.layer
+        var $ = layui.jquery
+        var laydate = layui.laydate
+        // 模拟点击搜索后由 ajax 请求得到的数据
+        $('#searchIpt').click(function () {
+
+            data = {
+                //表格里填充的数据
+                tableData: [{
+                    "roomNum": 301,
+                    "roomFloor": "3楼",
+                    "roomType": "商务房",
+                    "canUse": "是",
+                    "isBreak": '否',
+                    "hasWindow": "是",
+                    "hasSunshine": "是",
+                    "money": "300",
+                    "operate": {
+                        "freezeAct": 0,
+                    },
+                }, {
+                    "roomNum": 401,
+                    "roomFloor": "4楼",
+                    "roomType": "经济房",
+                    "canUse": "是",
+                    "isBreak": '否',
+                    "hasWindow": "否",
+                    "hasSunshine": "否",
+                    "money": "200",
+                    "operate": {
+                        "freezeAct": 0,
+                    },
+                }]
+            }
+
+            table.render({
+                elem: '#show',
+                page: true //开启分页
+                    ,
+                cols: [
+                        [ //表头
+                            {
+                                field: 'roomNum',
+                                title: '房间号',
+                                width: '12%',
+                                sort: true,
+                            }, {
+                                field: 'roomFloor',
+                                title: '楼层',
+                                width: '8%',
+                            }, {
+                                field: 'roomType',
+                                title: '房间类型',
+                                width: '17%',
+                                sort: true
+                            }, {
+                                field: 'canUse',
+                                title: '是否入住',
+                                width: '9%',
+                                
+                            }, {
+                                field: 'isBreak',
+                                title: '是否存在损坏',
+                                width: '9%',
+                                
+                            }, {
+                                field: 'hasWindow',
+                                title: '是否有窗',
+                                width: '9%',
+                                
+                            }, {
+                                field: 'hasSunshine',
+                                title: '是否向阳',
+                                width: '9%',
+                            }, {
+                                field: 'money',
+                                title: '价格',
+                                sort: true,
+                                width: '9%',
+                            }, {
+                                field: 'operate',
+                                title: '操作',
+                                width: '18.2%',
+                                toolbar: '#ipts'
+                            }
+                        ]
+                    ]
+
+                    // 在本地模拟数据
+                    ,
+                data: data.tableData
+            })
+
+            table.on('tool(show)', function (obj) {
+                var event = obj.event
+                var that = $(this)
+                var data = obj.data
+
+                if (event === 'freezeMey') {
+                    layer.open({
+                        type: 1,
+                        content: $('#details'),
+                        area:'',
+                    });
+                    console.log(data)
+                     $('#details').find('input').each(function () {
+                            var that = $(this)
+                            var name = that.attr("name")
+                            if(data[name]){
+                                that.val(data[name])
+                            }
+                        })
+                }
+
+                if (event === 'freezeAct') {
+                    layer.open({
+                        type: 1,
+                        content: $('#details2'),
+                        area:'',
+                    });
+
+                     $('#details2').find('input').each(function () {
+                            var that = $(this)
+                            var name = that.attr("name")
+                            if(data[name]){
+                                that.val(data[name])
+                            }
+                        })
+
+                }
+            })
+
+        })
+
+    })
+
+    	layui.use(['form'], function () {
+	        var form = layui.form
+	        //监听提交
+	        form.on('submit(formDemo)', function (data) {
+                layer.closeAll()
+	        	layer.msg("提交成功");
+//	            layer.msg(JSON.stringify(data.field));
+	            return false;
+	        });  
+      });
+</script>
+
+</html>

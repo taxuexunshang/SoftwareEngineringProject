@@ -1,0 +1,323 @@
+<!DOCTYPE html>
+<html>
+
+<head>
+    <meta charset="utf-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1, maximum-scale=1">
+    <title>酒店管理系统</title>
+    <link rel="stylesheet" href="../layui/css/layui.css">
+        <link rel="stylesheet" href="../css/border-pad.css" />
+    <script src="../layui/layui.js"></script>
+    <style type="text/css">
+        #searchIpt {
+            margin-left: 5px;
+        }
+        .layui-anim.layui-anim-upbit dd{
+        	color: #000000;
+        }
+    </style>
+</head>
+
+<body>
+    <div class="layui-container" style="width: 100%">
+        <form class="layui-form bs-center">
+            <div class="layui-form-item layui-col-sm3">
+                <label class="layui-form-label">楼层</label>
+                <div class="layui-input-block">
+                    <select name="room" lay-verify="required">
+                        <option value=""></option>
+                        <option value="0">1层</option>
+                        <option value="1">2层</option>
+                        <option value="2">3层</option>
+                        <option value="3">4层</option>
+                        <option value="4">5层</option>
+                    </select>
+                </div>
+            </div>
+
+            <div class="layui-col-sm3">
+                <label class="layui-form-label">房间号</label>
+                <div class="layui-input-block">
+                    <input type="text" name="userAccount" class="layui-input">
+                </div>
+            </div>
+
+
+
+            <div class="layui-col-sm3">
+                <label class="layui-form-label">开始日期</label>
+                <div class="layui-input-block">
+                    <input type="text" id="date1" name="userAccount" class="layui-input">
+                </div>
+            </div>
+
+            <div class="layui-col-sm3">
+                <label class="layui-form-label">结束日期</label>
+                <div class="layui-input-block">
+                    <input type="text" id="date2" name="userAccount" class="layui-input">
+                </div>
+            </div>
+            <div class="layui-form-item">
+                <div class="layui-col-sm3">
+                    <label class="layui-form-label">姓名</label>
+                    <div class="layui-input-block">
+                        <input type="text" name="userAccount" class="layui-input">
+                    </div>
+                </div>
+
+                <div class="layui-col-sm3">
+                    <label class="layui-form-label">身份证号</label>
+                    <div class="layui-input-block">
+                        <input type="text" name="userAccount" class="layui-input">
+                    </div>
+                </div>
+
+                <div class="layui-col-sm4" style="margin-left: 105px">
+                    <a id="searchIpt" class="layui-btn layui-btn-normal">搜索</a>
+                </div>
+            </div>
+        </form>
+
+        <form action="">
+            <div class="layui-col-sm12 bs-center">
+                <table id="show" lay-filter="show"></table>
+            </div>
+        </form>
+    </div>
+</body>
+<!-- <script src="../js/accountManage.js"></script> -->
+<script type="text/html" id="ipts">
+    <div class="layui-btn-group">
+          <a class="layui-btn layui-btn-xs" lay-event="freezeMey">完成</a>
+          <a class="layui-btn layui-btn-xs" lay-event="freezeAct">取消</a>
+        </div>
+    </script>
+<form class="layui-form bs-center" style="display: none;margin-top: 10px" id="addServer">
+    <div class="layui-form-item">
+        <label class="layui-form-label">房间号</label>
+        <div class="layui-input-inline">
+            <input type="text" name="title" required lay-verify="required" placeholder="请输入标题" autocomplete="off" class="layui-input">
+        </div>
+    </div>
+
+    <div class="layui-form-item">
+        <label class="layui-form-label">服务类别</label>
+        <div class="layui-input-inline">
+            <select name="city" lay-verify="required">
+                <option value=""></option>
+                <option value="0">送餐服务</option>
+                <option value="1">房间打扫</option>
+                <option value="2">衣服换洗</option>
+            </select>
+        </div>
+    </div>
+
+    <div class="layui-form-item">
+        <div class="layui-input-block">
+            <button class="layui-btn" lay-submit lay-filter="formDemo">立即提交</button>
+            <button type="reset" class="layui-btn layui-btn-primary">重置</button>
+        </div>
+    </div>
+</form>
+
+<form class="layui-form bs-center" action="" style="display: none;margin-top: 10px;" id="details">
+    <div class="layui-form-item">
+        <label class="layui-form-label">房间号</label>
+        <div class="layui-input-inline">
+            <input type="text" name="title" required lay-verify="required" placeholder="请输入标题" autocomplete="off" class="layui-input">
+        </div>
+    </div>
+
+    <div class="layui-form-item">
+        <label class="layui-form-label">楼层</label>
+        <div class="layui-input-inline">
+            <select name="city" lay-verify="required">
+                <option value=""></option>
+                <option value="0">1层</option>
+                <option value="1">2层</option>
+                <option value="2">3层</option>
+                <option value="3">4层</option>
+                <option value="4">5层</option>
+            </select>
+        </div>
+    </div>
+
+    <div class="layui-form-item">
+        <label class="layui-form-label">房间类型</label>
+        <div class="layui-input-inline">
+            <input type="text" name="title" required lay-verify="required" placeholder="请输入标题" autocomplete="off" class="layui-input">
+        </div>
+    </div>
+
+    <div class="layui-form-item">
+        <label class="layui-form-label">是否入住</label>
+        <div class="layui-input-inline">
+            <select name="city" lay-verify="required">
+                <option value="1">是</option>
+                <option value="0">否</option>
+            </select>
+        </div>
+    </div>
+
+    <div class="layui-form-item">
+        <label class="layui-form-label">是否向阳</label>
+        <div class="layui-input-inline">
+            <select name="city" lay-verify="required">
+                <option value="1">是</option>
+                <option value="0">否</option>
+            </select>
+        </div>
+    </div>
+
+    <div class="layui-form-item">
+        <label class="layui-form-label">是否损坏</label>
+        <div class="layui-input-inline">
+            <select name="city" lay-verify="required">
+                <option value="1">是</option>
+                <option value="0">否</option>
+            </select>
+        </div>
+    </div>
+
+    <div class="layui-form-item">
+        <label class="layui-form-label">价格</label>
+        <div class="layui-input-inline">
+            <input type="text" name="title" required lay-verify="required" placeholder="请输入标题" autocomplete="off" class="layui-input">
+        </div>
+    </div>
+
+    <div class="layui-form-item">
+        <div class="layui-input-block">
+            <button class="layui-btn" lay-submit lay-filter="formDemo">立即提交</button>
+            <button type="reset" class="layui-btn layui-btn-primary">重置</button>
+        </div>
+    </div>
+</form>
+
+<script>
+    layui.use(['table', 'layer', 'jquery', 'laydate'], function () {
+        var table = layui.table
+        var layer = layui.layer
+        var $ = layui.jquery
+        var laydate = layui.laydate
+
+        laydate.render({
+            elem: '#date1' //指定元素
+        });
+
+        laydate.render({
+            elem: '#date2' //指定元素
+        });
+
+    $("#add").click(function () {
+        layer.open({
+            type: 1,
+            content: $('#addServer'),
+            area: '',
+        });
+    })
+    // 模拟点击搜索后由 ajax 请求得到的数据
+    $('#searchIpt').click(function () {
+
+    data = {
+        //表格里填充的数据
+        tableData: [{
+            "roomNum": 301,
+            "roomHumanNum": "2",
+            "roomHuman": "张三",
+            "roomHumanID": "410703198605023326",
+            "roomOpenTime": '2018-10-01',
+            "roomOutTime": "2018-10-07",
+            "roomMoney": "200",
+            "operate": {
+                "freezeAct": 0,
+            },
+        }, {
+            "roomNum": 401,
+            "roomHumanNum": "3",
+            "roomHuman": "李四",
+            "roomHumanID": "410703198605023328",
+            "roomOpenTime": '2018-10-29',
+            "roomOutTime": "2018-11-01",
+            "roomMoney": "300",
+            "operate": {
+                "freezeAct": 0,
+            },
+        }]
+    }
+
+    table.render({
+        elem: '#show',
+        page: true //开启分页
+            ,
+        cols: [
+                [ //表头
+                    {
+                        field: 'roomNum',
+                        title: '房间号',
+                        width: '12%',
+                        sort: true,
+                    }, {
+                        field: 'roomHumanNum',
+                        title: '入住人数',
+                        width: '9%',
+                    }, {
+                        field: 'roomHuman',
+                        title: '入住登记人',
+                        width: '9%',
+                        sort: true
+                    }, {
+                        field: 'roomHumanID',
+                        title: '登记身份证号',
+                        width: '13%',
+                        sort: true
+                    }, {
+                        field: 'roomOpenTime',
+                        title: '入住时间',
+                        width: '20%',
+                        sort: true
+                    }, {
+                        field: 'roomOutTime',
+                        title: '退宿时间',
+                        width: '20%',
+                        sort: true
+                    }, {
+                        field: 'roomMoney',
+                        title: '消费金额',
+                        width: '17.2%',
+                        sort: true
+                    }
+                    // },{
+                    //     field: 'operate',
+                    //     title: '操作',
+                    //     width: '27%',
+                    //     toolbar: '#ipts'
+                    // }
+                ]
+            ]
+
+            // 在本地模拟数据
+            ,
+        data: data.tableData
+    })
+
+    table.on('tool(show)', function (obj) {
+        var event = obj.event
+        var that = $(this)
+
+        if (event === 'freezeMey') {
+            layer.msg("服务完成")
+        }
+
+        if (event === 'freezeAct') {
+            layer.msg("服务取消")
+
+        }
+    })
+
+    })
+
+    })
+</script>
+
+</html>

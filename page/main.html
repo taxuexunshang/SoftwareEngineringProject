@@ -1,0 +1,151 @@
+<!DOCTYPE html>
+<html>
+
+<head>
+    <meta charset="utf-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1, maximum-scale=1">
+    <title>酒店管理系统</title>
+    <link rel="stylesheet" href="../layui/css/layui.css">
+    <script src="../layui/layui.js"></script>
+    <script type="text/javascript">
+    	window.onload = function(){
+    		var can = document.getElementById("can");
+			var ctx = can.getContext("2d");
+			ctx.font = "25px 宋体";
+	    	var gradient=ctx.createLinearGradient(0,0,150,50);
+				gradient.addColorStop("0","#8590fb");
+				gradient.addColorStop("1.0","#89253e");
+				ctx.fillStyle = gradient;
+				ctx.fillText("酒店管理",2,35);
+			ctx.stroke();
+    	}
+    </script>
+</head>
+
+<body class="layui-layout-body">
+
+    <div class="layui-layout layui-layout-admin">
+        <!-- 头部导航栏 -->
+        <div class="layui-header">
+            <div class="layui-logo">
+              	<canvas id="can" width="150px" height="50px">22</canvas>
+            </div>
+            
+            <ul class="layui-nav layui-layout-left">
+                <li class="layui-nav-item">
+                    <a href="javascript:;">姓名：王五</a>
+                </li>
+                <li class="layui-nav-item">
+                    <a href="javascript:;">柜号：001</a>
+                </li>
+                <li class="layui-nav-item">
+                    <a href="javascript:;"></a>
+                </li>
+            </ul>
+            <ul class="layui-nav layui-layout-right">
+                <li class="layui-nav-item">
+                    
+                    <!-- <dl class="layui-nav-child">
+                        <dd>
+                            <a href="">基本资料</a>
+                        </dd>
+                        <dd>
+                            <a href="">安全设置</a>
+                        </dd>
+                    </dl> -->
+                </li>
+                <li class="layui-nav-item">
+                    <a href="changepass.html" id="changepass_btn">修改密码</a>
+                </li>
+                <li class="layui-nav-item">
+                    <a href="###" id="exit_btn">退出登录</a>
+                </li>
+            </ul>
+        </div>
+        <!-- 左侧导航栏 -->
+        <!-- 可以更改class更换导航栏颜色，eg：class="layui-bg-blue" -->
+        <!-- 默认使二级标题打开，加  layui-nav-itemed -->
+        <div class="layui-side layui-bg-black">
+            <div class="layui-side-scroll">
+            	
+                <ul class="layui-nav layui-nav-tree" lay-filter="test">
+                	
+                    <li class="layui-nav-item">
+                        <a class="layui-nav-item-title" href="javascript:;">入住管理</a>
+                        <dl class="layui-nav-child">
+                            <dd>
+                                <a href="Check_in_management.html">入住操作</a>
+                            </dd>
+                            <dd>
+                                <a href="accommodation_manage_register.html">入住办理</a>
+                            </dd>
+                        </dl>
+                    </li>
+
+                    <li class="layui-nav-item">
+                        <a href="tsbl.html">退宿登记</a>
+                    </li>
+
+                    <li class="layui-nav-item">
+                        <a class="layui-nav-item-title" href="javascript:;">房间管理</a>
+                        <dl class="layui-nav-child">
+                            <dd>
+                                <a href="fjxxcx.html">房间信息查询</a>
+                            </dd>
+                            <dd>
+                                <a href="roomChange.html">换房管理</a>
+                            </dd>
+                        </dl>
+                    </li>
+                    
+                    <li class="layui-nav-item">
+                        <a href="roomServer.html">酒店服务</a>
+                    </li>
+                            
+					<li class="layui-nav-item">
+                        <a class="" href="vipManagger.html">会员管理</a>
+                    </li>
+                    <li class="layui-nav-item">
+                        <a href="water.html">流水查询</a>
+                    </li>
+                    
+                </ul>
+            </div>
+        </div>
+
+        <div class="layui-body">
+            <!-- 内容主体区域 -->
+            <iframe id="iframe" src="welcome.html" style="box-sizing:border-box;width:101%;height:99%;border: 0;"></iframe>
+        </div>
+
+    </div>
+
+
+    <script>
+    	var iFrameObj=document.getElementById("iframe"); 
+			iFrameObj.style.background="white";
+//			iFrameObj.style.backgroundImage="url(../img/酒店图片.png)";
+			iFrameObj.style.backgroundSize="100% 100%";
+        //JavaScript代码区域
+        layui.use(['element','jquery'], function () {
+            var element = layui.element
+            var $ = layui.jquery
+
+            $('#exit_btn').click(function () {
+                window.location.href="index.html";
+              })
+
+            var $navs = $('.layui-nav>.layui-nav-item').find('a:not(".layui-nav-item-title")')
+            var $iframe = $('#iframe')
+            $navs.click(function(event){
+                var href = $(this).attr('href')
+                $iframe.attr('src', href)
+                
+                event.preventDefault()
+            })
+        
+        })
+    </script>
+</body>
+
+</html>
